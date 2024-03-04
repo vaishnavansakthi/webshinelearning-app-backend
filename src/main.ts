@@ -12,7 +12,6 @@ async function bootstrap() {
     .setTitle('Todo API')
     .setDescription('Create a API for Todo items')
     .setVersion('1.0')
-    .addTag('todo')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document, {
