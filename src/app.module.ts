@@ -21,7 +21,8 @@ import { TodoModule } from './todo/todo.module';
         database: configService.get("POSTGRES_DATABASE"),
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: true,
-        ssl: true
+        ssl: true,
+        autoLoadEntities: true
       }),
     }),
     TodoModule
