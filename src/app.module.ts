@@ -1,3 +1,4 @@
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -6,24 +7,25 @@ import { TodoModule } from './todo/todo.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'ep-dark-sunset-a4miov3z-pooler.us-east-1.aws.neon.tech',
-    port: 5432,
-    username: 'default',
-    password: 'mbJyz2V3NRfW',
-    database: 'verceldb',
-    entities: ["dist/**/*.entity{.ts,.js}"],
-    synchronize: true,
-    ssl: true,
-    url: 'postgres://default:mbJyz2V3NRfW@ep-dark-sunset-a4miov3z-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require',
-    migrations: ['/migrations/*{.ts,.js}'],
-    migrationsTableName: '_migrations',
-    logging: true,
-    migrationsRun: true
-  }),
-  TodoModule
-],
+  imports: [
+    ConfigModule.forRoot({isGlobal: true}),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get("POSTGRES_HOST"),
+        port: configService.get("POSTGRES_PORT"),
+        username: configService.get("POSTGRES_USER"),
+        password: configService.get("POSTGRES_PASSWORD"),
+        database: configService.get("POSTGRES_DATABASE"),
+        entities: ["dist/**/*.entity{.ts,.js}"],
+        synchronize: true,
+        ssl: true
+      }),
+    }),
+    TodoModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
