@@ -7,12 +7,18 @@ export class TodoController {
   constructor(private todoService: TodoService) {}
 
   @Post('create')
-  async createItem(@Body() todoDto: TodoDto) {
+  createItem(@Body() todoDto: TodoDto) {
     return this.todoService.createItem(todoDto.item, todoDto.completed);
   }
 
   @Get('getItem')
-  async getItems() {
+  getItems() {
     return this.todoService.getItems();
   }
+
+  @Get('test')
+  getTest(){
+    return this.todoService.getTest();
+  }
+
 }

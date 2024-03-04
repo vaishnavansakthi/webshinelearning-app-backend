@@ -15,7 +15,12 @@ import { TodoModule } from './todo/todo.module';
     database: 'verceldb',
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: true,
-    ssl: true
+    ssl: true,
+    url: 'postgres://default:mbJyz2V3NRfW@ep-dark-sunset-a4miov3z-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require',
+    migrations: ['/migrations/*{.ts,.js}'],
+    migrationsTableName: '_migrations',
+    logging: true,
+    migrationsRun: true
   }),
   TodoModule
 ],
