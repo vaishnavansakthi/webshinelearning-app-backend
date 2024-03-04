@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { AuthDto, LoginDto } from './dto/auth.dto';
+import { AuthDto, ForgotPassDto, LoginDto, ResetPassDto } from './dto/auth.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
@@ -24,12 +24,12 @@ export class AuthController {
   }
 
   @Post('forgot-password')
-  forgotPassword(@Body() forgotDto: { email: string }){
+  forgotPassword(@Body() forgotDto: ForgotPassDto){
     return this.authService.forgotPassword(forgotDto.email)
   }
   
   @Post('reset-password')
-  resetPassword(@Body() resetDto: {email: string, otp: string, newPassword: string}){
+  resetPassword(@Body() resetDto: ResetPassDto){
     return this.authService.resetPassword(resetDto.email, resetDto.otp, resetDto.newPassword)
   }
 

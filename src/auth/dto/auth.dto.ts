@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, IsNumberString, IsString, Length } from "class-val
 export class AuthDto {
     
     id: string;
-    
+
     @ApiProperty({
         example: 'Sakthi',
         required: true
@@ -58,4 +58,41 @@ export class LoginDto {
     @IsNotEmpty()
     @Length(8, 15)  
     password: string;
+}
+
+export class ForgotPassDto {
+    @ApiProperty({
+        example: 'test@gmail.com',
+        required: true
+    })
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+}
+
+export class ResetPassDto {
+    @ApiProperty({
+        example: 'test@gmail.com',
+        required: true
+    })
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @ApiProperty({
+        example: '67rt56',
+        required: true
+    })
+    @IsNotEmpty()
+    otp: string;
+
+    @ApiProperty({
+        example: 'dg473993@123D',
+        required: true
+    })
+    @IsString()
+    @IsNotEmpty()
+    @Length(8, 15)  
+    newPassword: string;
+
 }
