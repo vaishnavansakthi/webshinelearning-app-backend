@@ -8,9 +8,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors({ credentials: true });
 
+  
+
   const config = new DocumentBuilder()
-    .setTitle('Todo API')
-    .setDescription('Create a API for Todo items')
+    .setTitle('Webshinelearning portal API')
+    .setDescription('To give a best learning portal')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
