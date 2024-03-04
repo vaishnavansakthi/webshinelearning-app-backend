@@ -4,7 +4,7 @@ import { IsEmail, IsNotEmpty, IsNumberString, IsString, Length } from "class-val
 export class AuthDto {
     
     id: string;
-
+    
     @ApiProperty({
         example: 'Sakthi',
         required: true
