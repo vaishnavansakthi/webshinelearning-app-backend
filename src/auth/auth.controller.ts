@@ -1,9 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto, ForgotPassDto, LoginDto, ResetPassDto } from './dto/auth.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
+@ApiSecurity('x-api-key')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -32,6 +33,4 @@ export class AuthController {
   resetPassword(@Body() resetDto: ResetPassDto){
     return this.authService.resetPassword(resetDto.email, resetDto.otp, resetDto.newPassword)
   }
-
-
 }

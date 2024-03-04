@@ -8,12 +8,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.enableCors({ credentials: true });
 
-  
-
   const config = new DocumentBuilder()
     .setTitle('Webshinelearning portal API')
     .setDescription('To give a best learning portal')
     .setVersion('1.0')
+    .addApiKey({type: 'apiKey', name: 'x-api-key', in: 'header'}, 'x-api-key')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document, {
