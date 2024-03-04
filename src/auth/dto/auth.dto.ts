@@ -39,6 +39,8 @@ export class AuthDto {
     @Length(10, 10)
     mobileNumber: string;
 
+    resetPasswordToken: string;
+
 }
 
 export class LoginDto {

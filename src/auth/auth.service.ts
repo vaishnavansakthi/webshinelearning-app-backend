@@ -69,6 +69,9 @@ export class AuthService {
       upperCase: false,
       specialChars: false,
     });
+
+    user.resetPasswordToken = otp
+    await this.repository.save(user);
     
     await this.sendEmail(email, otp);
 
@@ -81,10 +84,16 @@ export class AuthService {
     if (!user) {
       throw new NotFoundException('User not found');
     }
+    
+    if (user.resetPasswordToken !== otp) {
+      throw new UnauthorizedException('Invalid OTP');
+    }  
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
 
+    
+    user.resetPasswordToken = null;
     await this.repository.save(user);
 
     return 'Password reset successfully';

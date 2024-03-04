@@ -16,4 +16,7 @@ export class AuthEntity {
 
     @Column()
     mobileNumber: string
+
+    @Column({nullable: true})
+    resetPasswordToken: string
 }
