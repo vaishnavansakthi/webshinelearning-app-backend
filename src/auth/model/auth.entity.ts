@@ -19,4 +19,7 @@ export class AuthEntity {
 
     @Column({nullable: true})
     resetPasswordToken: string
+
+    @Column({default: false})
+    isActivate: boolean
 }

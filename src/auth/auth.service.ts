@@ -52,7 +52,8 @@ export class AuthService {
       user: {
         username: resData.username,
         email: resData.email,
-        mobileNumber: resData.mobileNumber
+        mobileNumber: resData.mobileNumber,
+        isActivate: resData.isActivate
       },
     };
   }
@@ -78,7 +79,8 @@ export class AuthService {
       user: {
         username: user.username,
         email: user.email,
-        mobileNumber: user.mobileNumber
+        mobileNumber: user.mobileNumber,
+        isActivate: user.isActivate
       },
     };
   }
