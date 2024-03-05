@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthDto, ForgotPassDto, LoginDto, ResetPassDto } from './dto/auth.dto';
-import { ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from './guard/auth-guard';
 
 @ApiTags('Auth')
 @ApiSecurity('x-api-key')
+@ApiBearerAuth('authorization')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}

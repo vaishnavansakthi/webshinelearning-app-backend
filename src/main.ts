@@ -13,6 +13,7 @@ async function bootstrap() {
     .setDescription('To give a best learning portal')
     .setVersion('1.0')
     .addApiKey({type: 'apiKey', name: 'x-api-key', in: 'header'}, 'x-api-key')
+    .addBearerAuth({ type: 'http', name: 'authorization', scheme: 'bearer', bearerFormat: 'JWT' }, 'authorization')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document, {
