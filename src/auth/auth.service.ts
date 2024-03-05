@@ -6,11 +6,12 @@ import {
 } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthEntity } from './model/auth.entity';
+import { AuthEntity, Role } from './model/auth.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as otpGenerator from 'otp-generator';
 import { JwtService } from '@nestjs/jwt';
+import { ProfileDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -44,6 +45,7 @@ export class AuthService {
         id: resData.id,
         username: resData.username,
         email: resData.email,
+        role: resData.role
       },
       { secret: process.env.JWT_SECRET },
     );
@@ -53,15 +55,15 @@ export class AuthService {
         username: resData.username,
         email: resData.email,
         mobileNumber: resData.mobileNumber,
-        isActivate: resData.isActivate
+        isActivate: resData.isActivate,
+        role: resData.role
       },
     };
   }
 
   async login(email: string, password: string) {
     const user = await this.repository.findOneBy({ email: email });
-
-    if (!user) {
+    if (!user) {  
       throw new UnauthorizedException('Invalid credentials');
     }
 
@@ -71,7 +73,7 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
     const token = await this.jwtService.signAsync(
-      { id: user.id, username: user.username, email: user.email },
+      { id: user.id, username: user.username, email: user.email, role: user.role },
       { secret: process.env.JWT_SECRET },
     );
     return {
@@ -80,7 +82,8 @@ export class AuthService {
         username: user.username,
         email: user.email,
         mobileNumber: user.mobileNumber,
-        isActivate: user.isActivate
+        isActivate: user.isActivate,
+        role: user.role
       },
     };
   }
@@ -147,5 +150,42 @@ export class AuthService {
     };
 
     await transporter.sendMail(mailOptions);
+  }
+
+  async activateUser(userId, isEnable){
+    const user = await this.repository.findOneBy({ id: userId  });
+    if(!user.isActivate){
+      user.isActivate = isEnable
+    }
+    return this.repository.save(user)
+  }
+
+  async managingRole(userId: string, role: string){
+    const user = await this.repository.findOneBy({ id: userId  });
+    console.log(user)
+    if(role === "admin"){
+      user.role = Role.ADMIN
+    }else if (role === "mentor"){
+      user.role = Role.MENTOR
+    }else if(role === "user"){
+      user.role = Role.USER
+    }
+    return this.repository.save(user)
+  }
+
+  async updateProfile(userId: string, updateUserDto: ProfileDto) {
+    const user = await this.repository.findOneBy({ id: userId  });
+    console.log(user)
+    if (updateUserDto.dateOfBirth) {
+      user.dateOfBirth = updateUserDto.dateOfBirth;
+    }
+    if (updateUserDto.hobby) {
+      user.hobby = updateUserDto.hobby;
+    }
+    if (updateUserDto.favoriteProgrammingLanguage) {
+      user.favoriteProgrammingLanguage = updateUserDto.favoriteProgrammingLanguage;
+    }
+
+    return this.repository.save(user)
   }
 }

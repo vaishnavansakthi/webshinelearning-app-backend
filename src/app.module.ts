@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from './auth/guard/api-key.guard';
+import { RolesGuard } from './auth/guard/role-guard';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -25,6 +27,7 @@ import { ApiKeyGuard } from './auth/guard/api-key.guard';
       }),
     }),
     AuthModule,
+    UserModule
   ],
   controllers: [],
   providers: [
@@ -32,6 +35,10 @@ import { ApiKeyGuard } from './auth/guard/api-key.guard';
       provide: APP_GUARD,
       useClass: ApiKeyGuard,
     },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard
+    }
   ],
 })
 export class AppModule {}
