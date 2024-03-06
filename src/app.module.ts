@@ -2,7 +2,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { APP_GUARD, NestFactory } from '@nestjs/core';
+import { APP_GUARD } from '@nestjs/core';
 import { ApiKeyGuard } from './auth/guard/api-key.guard';
 import { RolesGuard } from './auth/guard/role-guard';
 import { UserModule } from './user/user.module';
@@ -41,21 +41,4 @@ import { UserModule } from './user/user.module';
     }
   ],
 })
-export class AppModule {
-  constructor (){
-    this.enableCors();
-  }
-
-  async enableCors() {
-    const app = await NestFactory.create(AppModule);
-
-    app.enableCors({
-      origin: 'http://localhost:5173',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
-      allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'],
-      credentials: true,
-      maxAge: 86400,
-    })
-  }
-
-}
+export class AppModule {}
