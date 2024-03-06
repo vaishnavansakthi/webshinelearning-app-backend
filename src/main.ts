@@ -6,7 +6,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.enableCors({ credentials: true });
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Webshinelearning portal API')
