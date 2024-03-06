@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
-    IsBoolean,
+  IsBoolean,
   IsDateString,
   IsEmail,
   IsNotEmpty,
@@ -147,22 +147,20 @@ export class ManageRoleDto {
   @ApiProperty({
     example: 'Update role admin | mentor | user',
     required: true,
-    description: "Need admin access to manage role"
+    description: 'Need admin access to manage role',
   })
   @IsString()
   @IsNotEmpty()
-  @Length(8, 15)
   role: string;
 }
 
 export class ActivateDto {
-    @ApiProperty({
-        example: true,
-        required: true,
-        description: "Need admin access to manage role"
-      })
-      @IsBoolean()
-      @IsNotEmpty()
-      @Length(8, 15)
-    isEnable: boolean
+  @ApiProperty({
+    example: true,
+    required: true,
+    description: 'Need admin access to manage role',
+  })
+  @IsBoolean()
+  @IsNotEmpty()
+  isEnable: boolean;
 }
