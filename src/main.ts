@@ -4,12 +4,10 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-const cors = require('cors')
-
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {cors: true});
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
-  app.use(cors({origin: 'http://localhost:5173'}))
+  app.enableCors()
 
   const config = new DocumentBuilder()
     .setTitle('Webshinelearning portal API')
