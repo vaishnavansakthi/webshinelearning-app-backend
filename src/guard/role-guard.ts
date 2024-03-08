@@ -1,6 +1,6 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Role } from '../model/auth.entity';
+import { Role } from '../auth/model/auth.entity';
 import { JwtService } from '@nestjs/jwt';
 
 const matchRoles = (roles, userRoles) => {

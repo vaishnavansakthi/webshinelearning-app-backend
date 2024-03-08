@@ -3,9 +3,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
-import { ApiKeyGuard } from './auth/guard/api-key.guard';
-import { RolesGuard } from './auth/guard/role-guard';
+import { ApiKeyGuard } from './guard/api-key.guard';
+import { RolesGuard } from './guard/role-guard';
 import { UserModule } from './user/user.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { UserModule } from './user/user.module';
       }),
     }),
     AuthModule,
-    UserModule
+    UserModule,
+    ProfileModule
   ],
   controllers: [],
   providers: [

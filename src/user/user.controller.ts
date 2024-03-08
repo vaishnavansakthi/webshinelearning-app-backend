@@ -1,7 +1,7 @@
 import { Controller, Get, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
-import { AuthGuard } from "../auth/guard/auth-guard";
-import { Roles } from "src/auth/decorator/roles.decorator";
+import { AuthGuard } from "../guard/auth-guard";
+import { Roles } from "src/decorator/roles.decorator";
 import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
 
 
@@ -13,7 +13,7 @@ export class UserController {
     constructor(private userService: UserService) {}
 
     @UseGuards(AuthGuard)
-    @Get('get-all-user')
+    @Get()
     @Roles('admin')
     getAllUsers(){
         return this.userService.getAllUser()

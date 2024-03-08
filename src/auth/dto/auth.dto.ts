@@ -62,32 +62,6 @@ export class AuthDto {
   favoriteProgrammingLanguage?: string;
 }
 
-export class ProfileDto {
-  @ApiProperty({
-    example: '03/09/1999',
-    required: true,
-  })
-  @IsOptional()
-  @IsDateString()
-  dateOfBirth?: Date;
-
-  @ApiProperty({
-    example: 'playing baseket ball',
-    required: true,
-  })
-  @IsOptional()
-  @IsString()
-  hobby?: string;
-
-  @ApiProperty({
-    example: 'javascript',
-    required: true,
-  })
-  @IsOptional()
-  @IsString()
-  favoriteProgrammingLanguage?: string;
-}
-
 export class LoginDto {
   @ApiProperty({
     example: 'test@gmail.com',

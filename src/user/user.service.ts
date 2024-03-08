@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AuthEntity, Role } from '../auth/model/auth.entity';
+import { AuthEntity } from '../auth/model/auth.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class UserService {
 
   async getAllUser() {
     return this.repository.find({
-      where: { role: Role.USER },
+      relations: ['profile'],
     });
   }
 }

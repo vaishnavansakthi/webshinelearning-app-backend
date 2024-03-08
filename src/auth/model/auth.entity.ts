@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Profile } from 'src/profile/model/profile.entity';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum Role {
   ADMIN = 'admin',
@@ -29,14 +30,8 @@ export class AuthEntity {
   @Column({ default: false })
   isActivate: boolean;
 
-  @Column({ nullable: true })
-  dateOfBirth: Date;
-
-  @Column({ nullable: true })
-  hobby: string;
-
-  @Column({ nullable: true })
-  favoriteProgrammingLanguage: string;
+  @OneToOne(() => Profile, (profile) => profile.user, { onDelete: 'CASCADE' })
+  profile: Profile;
 
   @Column({
     type: 'enum',

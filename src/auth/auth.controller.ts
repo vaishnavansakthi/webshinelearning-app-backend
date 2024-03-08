@@ -4,14 +4,13 @@ import {
   Param,
   Post,
   Put,
-  Request,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ActivateDto, AuthDto, ForgotPassDto, LoginDto, ManageRoleDto, ProfileDto, ResetPassDto } from './dto/auth.dto';
+import { ActivateDto, AuthDto, ForgotPassDto, LoginDto, ManageRoleDto, ResetPassDto } from './dto/auth.dto';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from './guard/auth-guard';
-import { Roles } from './decorator/roles.decorator';
+import { AuthGuard } from '../guard/auth-guard';
+import { Roles } from '../decorator/roles.decorator';
 
 @ApiTags('Auth')
 @ApiSecurity('x-api-key')
@@ -69,18 +68,18 @@ export class AuthController {
     return this.authService.managingRole(userId, data.role);
   }
 
-  @Put('profile/:id')
-  @UseGuards(AuthGuard)
-  @Roles('user')
-  async updateProfile(
-    @Param('id') userId: string,
-    @Body() updateUserDto: ProfileDto,
-    @Request() req,
-  ) {
-    if (req.user.id !== userId) {
-      throw new Error('Unauthorized');
-    }
+  // @Put('profile/:id')
+  // @UseGuards(AuthGuard)
+  // @Roles('user')
+  // async updateProfile(
+  //   @Param('id') userId: string,
+  //   @Body() updateUserDto: ProfileDto,
+  //   @Request() req,
+  // ) {
+  //   if (req.user.id !== userId) {
+  //     throw new Error('Unauthorized');
+  //   }
 
-    return this.authService.updateProfile(userId, updateUserDto);
-  }
+  //   return this.authService.updateProfile(userId, updateUserDto);
+  // }
 }

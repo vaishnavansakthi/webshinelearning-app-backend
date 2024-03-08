@@ -11,7 +11,6 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import * as otpGenerator from 'otp-generator';
 import { JwtService } from '@nestjs/jwt';
-import { ProfileDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -173,19 +172,19 @@ export class AuthService {
     return this.repository.save(user)
   }
 
-  async updateProfile(userId: string, updateUserDto: ProfileDto) {
-    const user = await this.repository.findOneBy({ id: userId  });
-    console.log(user)
-    if (updateUserDto.dateOfBirth) {
-      user.dateOfBirth = updateUserDto.dateOfBirth;
-    }
-    if (updateUserDto.hobby) {
-      user.hobby = updateUserDto.hobby;
-    }
-    if (updateUserDto.favoriteProgrammingLanguage) {
-      user.favoriteProgrammingLanguage = updateUserDto.favoriteProgrammingLanguage;
-    }
+  // async updateProfile(userId: string, updateUserDto: ProfileDto) {
+  //   const user = await this.repository.findOneBy({ id: userId  });
+  //   console.log(user)
+  //   if (updateUserDto.dateOfBirth) {
+  //     user.dateOfBirth = updateUserDto.dateOfBirth;
+  //   }
+  //   if (updateUserDto.hobby) {
+  //     user.hobby = updateUserDto.hobby;
+  //   }
+  //   if (updateUserDto.favoriteProgrammingLanguage) {
+  //     user.favoriteProgrammingLanguage = updateUserDto.favoriteProgrammingLanguage;
+  //   }
 
-    return this.repository.save(user)
-  }
+  //   return this.repository.save(user)
+  // }
 }
