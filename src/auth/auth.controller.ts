@@ -1,13 +1,14 @@
-import {
-  Body,
-  Controller,
-  Param,
-  Post,
-  Put,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ActivateDto, AuthDto, ForgotPassDto, LoginDto, ManageRoleDto, ResetPassDto } from './dto/auth.dto';
+import {
+  ActivateDto,
+  AuthDto,
+  ForgotPassDto,
+  LoginDto,
+  ManageRoleDto,
+  ResetPassDto,
+  VerifyOtpDto,
+} from './dto/auth.dto';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../guard/auth-guard';
 import { Roles } from '../decorator/roles.decorator';
@@ -39,47 +40,27 @@ export class AuthController {
     return this.authService.forgotPassword(forgotDto.email);
   }
 
+  @Post('verify-otp')
+  verifyOtp(@Body() verifyOtpDto: VerifyOtpDto) {
+    return this.authService.verifyOtp(verifyOtpDto.email, verifyOtpDto.otp);
+  }
+
   @Post('reset-password')
   resetPassword(@Body() resetDto: ResetPassDto) {
-    return this.authService.resetPassword(
-      resetDto.email,
-      resetDto.otp,
-      resetDto.newPassword,
-    );
+    return this.authService.resetPassword(resetDto.email, resetDto.newPassword);
   }
 
   @Put('activate/:id')
   @UseGuards(AuthGuard)
   @Roles('admin')
-  async activate(
-    @Param('id') userId: string,
-    @Body() data: ActivateDto,
-  ) {
+  async activate(@Param('id') userId: string, @Body() data: ActivateDto) {
     return this.authService.activateUser(userId, data.isEnable);
   }
 
   @Put('manage-roles/:id')
   @UseGuards(AuthGuard)
   @Roles('admin')
-  async manageRoles(
-    @Param('id') userId: string,
-    @Body() data: ManageRoleDto,
-  ) {
+  async manageRoles(@Param('id') userId: string, @Body() data: ManageRoleDto) {
     return this.authService.managingRole(userId, data.role);
   }
-
-  // @Put('profile/:id')
-  // @UseGuards(AuthGuard)
-  // @Roles('user')
-  // async updateProfile(
-  //   @Param('id') userId: string,
-  //   @Body() updateUserDto: ProfileDto,
-  //   @Request() req,
-  // ) {
-  //   if (req.user.id !== userId) {
-  //     throw new Error('Unauthorized');
-  //   }
-
-  //   return this.authService.updateProfile(userId, updateUserDto);
-  // }
 }

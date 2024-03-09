@@ -106,10 +106,10 @@ export class AuthService {
 
     await this.sendEmail(email, otp);
 
-    return otp;
+    return 'Please check your mail for otp';
   }
 
-  async resetPassword(email: string, otp: string, newPassword: string) {
+  async verifyOtp(email: string, otp: string){
     const user = await this.repository.findOneBy({ email: email });
 
     if (!user) {
@@ -118,6 +118,16 @@ export class AuthService {
 
     if (user.resetPasswordToken !== otp) {
       throw new UnauthorizedException('Invalid OTP');
+    }
+
+    return "OTP verified"
+  }
+
+  async resetPassword(email: string, newPassword: string) {
+    const user = await this.repository.findOneBy({ email: email });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -171,20 +181,4 @@ export class AuthService {
     }
     return this.repository.save(user)
   }
-
-  // async updateProfile(userId: string, updateUserDto: ProfileDto) {
-  //   const user = await this.repository.findOneBy({ id: userId  });
-  //   console.log(user)
-  //   if (updateUserDto.dateOfBirth) {
-  //     user.dateOfBirth = updateUserDto.dateOfBirth;
-  //   }
-  //   if (updateUserDto.hobby) {
-  //     user.hobby = updateUserDto.hobby;
-  //   }
-  //   if (updateUserDto.favoriteProgrammingLanguage) {
-  //     user.favoriteProgrammingLanguage = updateUserDto.favoriteProgrammingLanguage;
-  //   }
-
-  //   return this.repository.save(user)
-  // }
 }

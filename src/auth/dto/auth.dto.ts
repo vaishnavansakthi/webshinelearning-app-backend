@@ -91,7 +91,7 @@ export class ForgotPassDto {
   email: string;
 }
 
-export class ResetPassDto {
+export class VerifyOtpDto {
   @ApiProperty({
     example: 'test@gmail.com',
     required: true,
@@ -106,6 +106,17 @@ export class ResetPassDto {
   })
   @IsNotEmpty()
   otp: string;
+}
+
+
+export class ResetPassDto {
+  @ApiProperty({
+    example: 'test@gmail.com',
+    required: true,
+  })
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 
   @ApiProperty({
     example: 'dg473993@123D',
