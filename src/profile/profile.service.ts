@@ -13,7 +13,10 @@ export class ProfileService {
   ) {}
 
   async createProfile(userId: string, degree: string) {
+    console.log(userId, degree)
     const user = await this.userRepository.findOneBy({ id: userId });
+
+    console.log(user, userId, degree)
 
     if (!user) {
       throw new Error(`User with id ${userId} not found`);

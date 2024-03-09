@@ -9,7 +9,7 @@ export class Profile {
   @Column({ nullable: true })
   degree: string;
 
-  @OneToOne(() =>   AuthEntity, (user) => user.profile, { onDelete: 'CASCADE' })
+  @OneToOne(() =>   AuthEntity, (user) => user.profile, { onDelete: 'CASCADE', cascade: true })
   @JoinColumn()
   user: AuthEntity;
 }

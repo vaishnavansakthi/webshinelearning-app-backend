@@ -12,9 +12,7 @@ export class ProfileDto {
     @IsString()
     degree: string;
 
-    @ApiProperty({
-        required: true
-    })
+    @IsString()
     userId: string;
     
 }
