@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
-// import { ApiKeyGuard } from './guard/api-key.guard';
+import { ApiKeyGuard } from './guard/api-key.guard';
 import { RolesGuard } from './guard/role-guard';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
@@ -33,14 +33,14 @@ import { ProfileModule } from './profile/profile.module';
   ],
   controllers: [],
   providers: [
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: ApiKeyGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: ApiKeyGuard,
+    },
     {
       provide: APP_GUARD,
       useClass: RolesGuard
-    }
+    },
   ],
 })
 export class AppModule {}
