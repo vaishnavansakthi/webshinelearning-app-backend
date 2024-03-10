@@ -4,6 +4,7 @@ import { AuthController } from "./auth.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthEntity } from "./model/auth.entity";
 import { JwtModule, JwtService } from "@nestjs/jwt";
+import { GoogleStrategy } from "src/strategy/google.strategy";
 
 @Module({
     imports: [TypeOrmModule.forFeature([AuthEntity]), JwtModule.register({
@@ -11,7 +12,7 @@ import { JwtModule, JwtService } from "@nestjs/jwt";
         secret: process.env.JWT_SECRET,
         signOptions: { expiresIn: '1d' }
     })],
-    providers: [AuthService, JwtService],
+    providers: [AuthService, JwtService, GoogleStrategy],
     controllers: [AuthController]
 })
 export class AuthModule {}
