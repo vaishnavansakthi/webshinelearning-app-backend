@@ -8,19 +8,28 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
-  app.enableCors(({
-      origin: ['https://webshinelearning-app-backend.vercel.app'], 
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-      allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-      credentials: true,
-  }))
+  app.enableCors({
+    origin: ['https://webshinelearning-app-backend.vercel.app'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders:
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Webshinelearning portal API')
     .setDescription('To give a best learning portal')
     .setVersion('1.0')
-    .addApiKey({type: 'apiKey', name: 'x-api-key', in: 'header'}, 'x-api-key')
-    .addBearerAuth({ type: 'http', name: 'authorization', scheme: 'bearer', bearerFormat: 'JWT' }, 'authorization')
+    .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'x-api-key')
+    .addBearerAuth(
+      {
+        type: 'http',
+        name: 'authorization',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+      'authorization',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document, {
