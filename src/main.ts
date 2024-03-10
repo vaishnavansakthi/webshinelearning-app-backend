@@ -10,7 +10,7 @@ async function bootstrap() {
 
   app.enableCors(({
       origin: ['https://webshinelearning-app-backend.vercel.app'], 
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
       credentials: true,
   }))
