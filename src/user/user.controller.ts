@@ -1,7 +1,7 @@
-import { Controller, Get, UseGuards } from "@nestjs/common";
-import { UserService } from "./user.service";
+import { Controller, Delete, Get, Param, UseGuards } from "@nestjs/common";
+import { UserService} from "./user.service";
 import { AuthGuard } from "../guard/auth-guard";
-import { Roles } from "src/decorator/roles.decorator";
+import { Roles } from "../decorator/roles.decorator";
 import { ApiBearerAuth, ApiSecurity, ApiTags } from "@nestjs/swagger";
 
 
@@ -18,5 +18,19 @@ export class UserController {
     getAllUsers(){
         return this.userService.getAllUser()
     }
+    @UseGuards(AuthGuard)
+    @Get(':id')
+    @Roles('admin', 'mentor', 'user')
+    getUsersById(@Param('id') id: string){
+        return this.userService.getUserById(id)
+    }
+
+    @UseGuards(AuthGuard)
+    @Delete(':userId')
+    @Roles('admin')
+    deleteUser(@Param('userId') userId: string){
+        return this.userService.deleteUser(userId)
+    }
 
 }
+
