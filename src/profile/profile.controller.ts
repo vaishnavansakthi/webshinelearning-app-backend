@@ -50,7 +50,7 @@ export class ProfileController {
 
   @Get()
   @UseGuards(AuthGuard)
-  @Roles('admin')
+  @Roles('admin', 'mentor', 'user')
   getAllProfile() {
     return this.profileService.getAllProfile();
   }
