@@ -63,7 +63,7 @@ export class AuthService {
   async login(email: string, password: string) {
     const user = await this.repository.findOneBy({ email: email });
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('User not found');
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -83,6 +83,7 @@ export class AuthService {
     return {
       access_token: token,
       user: {
+        id: user.id,
         username: user.username,
         email: user.email,
         mobileNumber: user.mobileNumber,
