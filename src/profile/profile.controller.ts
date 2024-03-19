@@ -56,7 +56,7 @@ export class ProfileController {
   }
 
   @UseGuards(AuthGuard)
-  @Roles('admin', 'mentor', 'user')
+  @Roles('admin')
   @Put(':id')
   async updateProfile(
     @Param('id') id: string,

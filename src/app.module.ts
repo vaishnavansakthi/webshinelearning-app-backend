@@ -7,6 +7,8 @@ import { ApiKeyGuard } from './guard/api-key.guard';
 import { RolesGuard } from './guard/role-guard';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
+import { AttendanceModule } from './attendance/attendance.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
   imports: [
@@ -29,7 +31,9 @@ import { ProfileModule } from './profile/profile.module';
     }),
     AuthModule,
     UserModule,
-    ProfileModule
+    ProfileModule,
+    AttendanceModule,
+    TaskModule
   ],
   controllers: [],
   providers: [

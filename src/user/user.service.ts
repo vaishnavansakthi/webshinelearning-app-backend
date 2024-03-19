@@ -11,7 +11,7 @@ export class UserService {
 
   async getAllUser() {
     return this.repository.find({
-      relations: ['profile'],
+      relations: ['profile','attendance','tasks'],
     });
   }
 
