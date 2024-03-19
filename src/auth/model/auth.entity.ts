@@ -6,13 +6,11 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-
 export enum Role {
   ADMIN = 'admin',
   MENTOR = 'mentor',
   USER = 'user',
 }
-
 @Entity()
 export class AuthEntity {
   @PrimaryGeneratedColumn('uuid')
