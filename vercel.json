@@ -15,12 +15,12 @@
                 "POST",
                 "PUT",
                 "PATCH",
+                "OPTIONS",
                 "DELETE",
-                "OPTIONS"
-            ],
-            "headers": {
-                "Access-Control-Allow-Origin": "*"
-            }
+                "HEAD",
+                "CONNECT",
+                "TRACE"
+            ]
         }
     ]
 }
