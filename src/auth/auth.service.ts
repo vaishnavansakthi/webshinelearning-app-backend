@@ -93,24 +93,6 @@ export class AuthService {
     };
   }
 
-  async googleLogin(req) {
-    const userData = await this.repository.findOneBy({ email: req.user.email });
-    if(!req.user){
-      return "No User Found"
-    }
-    return {
-      message: "User Info from google",
-      user: {
-        username: userData.username,
-        email: userData.email,
-        mobileNumber: userData.mobileNumber,
-        isActivate: userData.isActivate,
-        role: userData.role,
-        ...req.user
-      },
-    }
-  }
-
 
   async forgotPassword(email: string) {
     const user = await this.repository.findOneBy({ email: email });
