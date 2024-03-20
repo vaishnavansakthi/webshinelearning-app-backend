@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Param, Put, Delete, Body, UseGuards } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
 import { Attendance } from './model/attendance.entity';
 import { AuthGuard } from '../guard/auth-guard';
@@ -39,20 +39,20 @@ export class AttendanceController {
     return await this.attendanceService.getAllAttendance();
   }
 
-//   @Put(':attendanceId')
-//   @UseGuards(AuthGuard)
-//   @Roles('admin', 'user')
-//   async updateAttendance(
-//     @Param('attendanceId') attendanceId: string,
-//     @Body() updatedAttendance: Partial<Attendance>,
-//   ): Promise<Attendance> {
-//     return await this.attendanceService.updateAttendance(attendanceId, updatedAttendance);
-//   }
+  @Put(':attendanceId')
+  @UseGuards(AuthGuard)
+  @Roles('admin', 'user')
+  async updateAttendance(
+    @Param('attendanceId') attendanceId: string,
+    @Body() updatedAttendance: Partial<Attendance>,
+  ): Promise<Attendance> {
+    return await this.attendanceService.updateAttendance(attendanceId, updatedAttendance);
+  }
 
-//   @Delete(':attendanceId')
-//   @UseGuards(AuthGuard)
-//   @Roles('admin', 'user')
-//   async deleteAttendance(@Param('attendanceId') attendanceId: string): Promise<void> {
-//     await this.attendanceService.deleteAttendance(attendanceId);
-//   }
+  @Delete(':attendanceId')
+  @UseGuards(AuthGuard)
+  @Roles('admin', 'user')
+  async deleteAttendance(@Param('attendanceId') attendanceId: string): Promise<void> {
+    await this.attendanceService.deleteAttendance(attendanceId);
+  }
 }

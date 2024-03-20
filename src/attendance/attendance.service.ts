@@ -45,33 +45,33 @@ export class AttendanceService {
     return await this.attendanceRepository.find();
   }
 
-//   async updateAttendance(
-//     attendanceId: string,
-//     updatedAttendance: Partial<Attendance>,
-//   ): Promise<Attendance> {
-//     const attendance = await this.attendanceRepository.findOneBy({
-//       id: attendanceId,
-//     });
-//     if (!attendance) {
-//       throw new NotFoundException(
-//         `Attendance with ID ${attendanceId} not found`,
-//       );
-//     }
+  async updateAttendance(
+    attendanceId: string,
+    updatedAttendance: Partial<Attendance>,
+  ): Promise<Attendance> {
+    const attendance = await this.attendanceRepository.findOneBy({
+      id: attendanceId,
+    });
+    if (!attendance) {
+      throw new NotFoundException(
+        `Attendance with ID ${attendanceId} not found`,
+      );
+    }
 
-//     Object.assign(attendance, updatedAttendance);
-//     return await this.attendanceRepository.save(attendance);
-//   }
+    Object.assign(attendance, updatedAttendance);
+    return await this.attendanceRepository.save(attendance);
+  }
 
-//   async deleteAttendance(attendanceId: string): Promise<void> {
-//     const attendance = await this.attendanceRepository.findOneBy({
-//       id: attendanceId,
-//     });
-//     if (!attendance) {
-//       throw new NotFoundException(
-//         `Attendance with ID ${attendanceId} not found`,
-//       );
-//     }
+  async deleteAttendance(attendanceId: string): Promise<void> {
+    const attendance = await this.attendanceRepository.findOneBy({
+      id: attendanceId,
+    });
+    if (!attendance) {
+      throw new NotFoundException(
+        `Attendance with ID ${attendanceId} not found`,
+      );
+    }
 
-//     await this.attendanceRepository.delete(attendanceId);
-//   }
+    await this.attendanceRepository.delete(attendanceId);
+  }
 }
