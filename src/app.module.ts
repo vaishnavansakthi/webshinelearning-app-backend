@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { TaskModule } from './tasks/tasks.module';
+import { LeaderboardModule } from './leaderboard/leaderboard.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { TaskModule } from './tasks/tasks.module';
     UserModule,
     ProfileModule,
     AttendanceModule,
-    TaskModule
+    TaskModule,
+    LeaderboardModule
   ],
   controllers: [],
   providers: [

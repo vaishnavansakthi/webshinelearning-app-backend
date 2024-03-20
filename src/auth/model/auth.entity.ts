@@ -4,10 +4,11 @@ import {
   Entity,
   OneToOne,
   PrimaryGeneratedColumn,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 import { Attendance } from '../../attendance/model/attendance.entity';
 import { Task } from '../../tasks/model/tasks.entity';
+import { Leaderboard } from '../../leaderboard/model/leaderboard.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -47,6 +48,11 @@ export class AuthEntity {
     onDelete: 'CASCADE',
   })
   attendance: Attendance[];
+
+  @OneToMany(() => Leaderboard, (leaderboard) => leaderboard.user, {
+    onDelete: 'CASCADE',
+  })
+  leaderboard: Leaderboard[];
 
   @OneToMany(() => Task, (task) => task.user, { onDelete: 'CASCADE' })
   tasks: Task[];
