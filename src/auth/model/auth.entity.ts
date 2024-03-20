@@ -7,6 +7,7 @@ import {
   OneToMany
 } from 'typeorm';
 import { Attendance } from '../../attendance/model/attendance.entity';
+import { Task } from '../../tasks/model/tasks.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -46,6 +47,9 @@ export class AuthEntity {
     onDelete: 'CASCADE',
   })
   attendance: Attendance[];
+
+  @OneToMany(() => Task, (task) => task.user, { onDelete: 'CASCADE' })
+  tasks: Task[];
 
   @Column({
     type: 'enum',

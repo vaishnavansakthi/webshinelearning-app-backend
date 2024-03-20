@@ -8,6 +8,7 @@ import { RolesGuard } from './guard/role-guard';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
 import { AttendanceModule } from './attendance/attendance.module';
+import { TaskModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { AttendanceModule } from './attendance/attendance.module';
     AuthModule,
     UserModule,
     ProfileModule,
-    AttendanceModule
+    AttendanceModule,
+    TaskModule
   ],
   controllers: [],
   providers: [

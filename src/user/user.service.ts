@@ -11,12 +11,12 @@ export class UserService {
 
   async getAllUser() {
     return this.repository.find({
-      relations: ['profile', 'attendance'],
+      relations: ['profile', 'attendance', 'tasks'],
     });
   }
 
   async getUserById(userId: string): Promise<any> {
-    const user = await this.repository.find({where: {id: userId}, relations: ['profile', 'attendance']});
+    const user = await this.repository.find({where: {id: userId}, relations: ['profile', 'attendance', 'tasks']});
     
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
