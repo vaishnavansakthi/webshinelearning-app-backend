@@ -4,7 +4,9 @@ import {
   Entity,
   OneToOne,
   PrimaryGeneratedColumn,
+  OneToMany
 } from 'typeorm';
+import { Attendance } from '../../attendance/model/attendance.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -39,6 +41,11 @@ export class AuthEntity {
 
   @OneToOne(() => Profile, (profile) => profile.user, { onDelete: 'CASCADE' })
   profile: Profile;
+
+  @OneToMany(() => Attendance, (attendance) => attendance.user, {
+    onDelete: 'CASCADE',
+  })
+  attendance: Attendance[];
 
   @Column({
     type: 'enum',
