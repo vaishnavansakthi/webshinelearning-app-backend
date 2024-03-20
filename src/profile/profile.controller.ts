@@ -48,6 +48,13 @@ export class ProfileController {
     );
   }
 
+  @Get(':id')
+  @UseGuards(AuthGuard)
+  @Roles('admin', 'mentor', 'user')
+  async getProfileById(@Param('id') id: string): Promise<Profile> {
+    return this.profileService.getProfileById(id);
+  }
+
   @Get()
   @UseGuards(AuthGuard)
   @Roles('admin', 'mentor', 'user')

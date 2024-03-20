@@ -42,6 +42,19 @@ export class ProfileService {
     return this.profileRepository.save(profile);
   }
 
+  async getProfileById(profileId: string): Promise<any> {
+    const profile = await this.profileRepository.find({
+      where: { id: profileId },
+      relations: ['user'],
+    });
+
+    if (!profile) {
+      throw new NotFoundException(`Profile with id ${profileId} not found`);
+    }
+
+    return profile;
+  }
+
   async getAllProfile() {
     return this.profileRepository.find({ relations: ['user'] });
   }
