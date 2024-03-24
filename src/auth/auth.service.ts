@@ -93,7 +93,6 @@ export class AuthService {
     };
   }
 
-
   async forgotPassword(email: string) {
     const user = await this.repository.findOneBy({ email: email });
 
@@ -239,9 +238,9 @@ export class AuthService {
 
   async activateUser(userId, isEnable) {
     const user = await this.repository.findOneBy({ id: userId });
-    if (!user.isActivate) {
-      user.isActivate = isEnable;
-    }
+
+    user.isActivate = isEnable;
+
     return this.repository.save(user);
   }
 

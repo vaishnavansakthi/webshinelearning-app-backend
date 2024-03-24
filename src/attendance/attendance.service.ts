@@ -38,6 +38,9 @@ export class AttendanceService {
   async getAttendance(userId: string): Promise<Attendance[]> {
     return await this.attendanceRepository.find({
       where: { user: { id: userId } },
+      order: {
+        date: 'DESC'
+      }
     });
   }
 

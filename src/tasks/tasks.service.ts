@@ -27,7 +27,10 @@ export class TaskService {
   }
 
   async getTasksByUserId(userId: string): Promise<Task[]> {
-    return await this.taskRepository.find({ where: { user: { id: userId } } });
+    return await this.taskRepository.find({
+      where: { user: { id: userId } },
+      order: { createdAt: 'DESC' },
+    });
   }
 
   async getAllTasks(): Promise<Task[]> {
