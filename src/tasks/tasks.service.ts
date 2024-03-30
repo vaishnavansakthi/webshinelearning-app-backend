@@ -34,7 +34,10 @@ export class TaskService {
   }
 
   async getAllTasks(): Promise<Task[]> {
-    return await this.taskRepository.find();
+    return await this.taskRepository.find({
+      relations: ['user'],
+      select: ['id', 'title', 'createdAt','githubUrl', 'deployedUrl', 'user'],
+    });
   }
 
   async updateTask(taskId: string, updatedTask: Partial<Task>): Promise<Task> {

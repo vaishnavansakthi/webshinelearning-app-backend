@@ -39,13 +39,16 @@ export class AttendanceService {
     return await this.attendanceRepository.find({
       where: { user: { id: userId } },
       order: {
-        date: 'DESC'
-      }
+        date: 'DESC',
+      },
     });
   }
 
   async getAllAttendance(): Promise<Attendance[]> {
-    return await this.attendanceRepository.find();
+    return await this.attendanceRepository.find({
+      relations: ['user'],
+      select: ['id', 'user', 'title', 'desc', 'createdAt', 'status'],
+    });
   }
 
   async updateAttendance(
