@@ -7,11 +7,24 @@ export class LeaderboardDto {
         example: "improve code quality"
     })
     @IsString()
-    suggestion: string;
+    title: string;
 
     @ApiProperty({
         required: true,
-        example: 50
+        example: 8
     })
-    points: number;
+    storyPoints: number;
+
+    @ApiProperty({
+        required: true,
+        example: "Todo"
+    })
+    status: string;
+
+    @ApiProperty({
+        required: true,
+        example: "This is a description"
+    })
+    comments: string;
+
 }

@@ -9,6 +9,7 @@ import {
 import { Attendance } from '../../attendance/model/attendance.entity';
 import { Task } from '../../tasks/model/tasks.entity';
 import { Leaderboard } from '../../leaderboard/model/leaderboard.entity';
+import { TaskTracker } from '../../tasktracker/model/tasktracker.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -38,9 +39,6 @@ export class AuthEntity {
   @Column({ default: false })
   isActivate: boolean;
 
-  // @CreateDateColumn({ nullable: true })
-  // createdAt: Date;
-
   @OneToOne(() => Profile, (profile) => profile.user, { onDelete: 'CASCADE' })
   profile: Profile;
 
@@ -56,6 +54,11 @@ export class AuthEntity {
 
   @OneToMany(() => Task, (task) => task.user, { onDelete: 'CASCADE' })
   tasks: Task[];
+
+  @OneToMany(() => TaskTracker, (taskTracker) => taskTracker.user, {
+    onDelete: 'CASCADE',
+  })
+  taskTracker: TaskTracker[];
 
   @Column({
     type: 'enum',
