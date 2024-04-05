@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, Body, UseGuards, ParseUUIDPipe, NotFoundException } from '@nestjs/common';
 import { TaskTrackerService } from './tasktracker.service';
 import { TaskTracker } from './model/tasktracker.entity';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
@@ -25,6 +25,15 @@ export class TaskTrackerController {
     async getTaskTrackerEntryById(@Param('id') id: string): Promise<TaskTracker> {
         return this.taskTrackerService.getTaskTrackerEntryById(id);
     }
+
+    @Get('user/:userId')
+  async getTaskTrackersByUserId(@Param('userId') userId: string): Promise<TaskTracker[]> {
+    const taskTrackers = await this.taskTrackerService.getTaskTrackersByUserId(userId);
+    if (!taskTrackers || taskTrackers.length === 0) {
+      throw new NotFoundException(`No TaskTrackers found for user with id ${userId}`);
+    }
+    return taskTrackers;
+  }
 
     @Post(':userId')
     @UseGuards(AuthGuard)

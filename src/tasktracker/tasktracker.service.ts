@@ -44,6 +44,13 @@ export class TaskTrackerService {
     return taskTrackerEntry;
   }
 
+  async getTaskTrackersByUserId(userId: string): Promise<TaskTracker[]> {
+    return this.taskTrackerRepository.find({
+      where: { user: { id: userId } },
+      relations: ['user'],
+    });
+  }
+
   async updateTaskTrackerEntry(
     taskTrackerId: string,
     updatedData: Partial<TaskTracker>,
