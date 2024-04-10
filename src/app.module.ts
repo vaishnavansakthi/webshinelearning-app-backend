@@ -11,6 +11,7 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { TaskModule } from './tasks/tasks.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { TaskTrackerModule } from './tasktracker/tasktracker.module';
+import { MemesModule } from './memes/memes.module';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { TaskTrackerModule } from './tasktracker/tasktracker.module';
     AttendanceModule,
     TaskModule,
     LeaderboardModule,
-    TaskTrackerModule
+    TaskTrackerModule,
+    MemesModule
   ],
   controllers: [],
   providers: [

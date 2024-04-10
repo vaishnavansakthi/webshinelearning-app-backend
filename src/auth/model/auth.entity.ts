@@ -10,6 +10,7 @@ import { Attendance } from '../../attendance/model/attendance.entity';
 import { Task } from '../../tasks/model/tasks.entity';
 import { Leaderboard } from '../../leaderboard/model/leaderboard.entity';
 import { TaskTracker } from '../../tasktracker/model/tasktracker.entity';
+import { Memes } from '../../memes/model/memes.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -59,6 +60,9 @@ export class AuthEntity {
     onDelete: 'CASCADE',
   })
   taskTracker: TaskTracker[];
+
+  @OneToMany(() => Memes, (memes) => memes.user, { onDelete: 'CASCADE' })
+  memes: Memes[];
 
   @Column({
     type: 'enum',

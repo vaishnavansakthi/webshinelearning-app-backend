@@ -3,7 +3,7 @@ import { LeaderboardService } from './leaderboard.service';
 import { Leaderboard } from './model/leaderboard.entity';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../guard/auth-guard';
-import { Roles } from 'src/decorator/roles.decorator';
+import { Roles } from '../../src/decorator/roles.decorator';
 
 @ApiTags('Leaderboard')
 @ApiSecurity('x-api-key')
