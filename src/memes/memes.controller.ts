@@ -8,10 +8,10 @@ import { Memes } from './model/memes.entity';
 import { AuthGuard } from '../guard/auth-guard';
 import { Roles } from '../../src/decorator/roles.decorator';
 
-@ApiTags('upload')
+@ApiTags('Memes')
 @ApiSecurity('x-api-key')
 @ApiBearerAuth('authorization')
-@Controller('upload')
+@Controller('memes')
 @FormDataRequest()
 export class MemesController {
   constructor(
