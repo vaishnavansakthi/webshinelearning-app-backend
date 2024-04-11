@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Memes } from './model/memes.entity';
+import * as cloudinary from 'cloudinary';
 
 @Injectable()
 export class MemesService {
@@ -32,15 +33,16 @@ export class MemesService {
     });
   }
 
-//   update(id: number, updateUploadDto: UpdateUploadDto) {
-//     return `This action updates a #${id} upload`;
-//   }
-
   async remove(id: number) {
-    const exists = await this.findOne(id)
-    if (!exists) {
-      return new NotFoundException('File not found.');
+    const meme: any = await this.repo.find({where: { id }});
+    if (!meme) {
+      throw new NotFoundException('Meme not found.');
     }
+
+    const public_id = meme[0]?.imagePublicId;
+
+    await cloudinary.v2.uploader.destroy(public_id);
+
     return this.repo.delete(id);
   }
 }

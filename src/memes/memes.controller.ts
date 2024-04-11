@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UseGuards, InternalServerErrorException, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, InternalServerErrorException, ParseUUIDPipe, Delete } from '@nestjs/common';
 import { MemesService } from './memes.service';
 import { CreateUploadDto, UploadInput } from './dto/create-upload.dto';
 import { ApiConsumes, ApiCreatedResponse, ApiTags, ApiBearerAuth, ApiSecurity } from '@nestjs/swagger';
@@ -30,16 +30,17 @@ export class MemesController {
   async createMemes(@Param('userId', ParseUUIDPipe) userId: string,@Body() createUploadDto: CreateUploadDto) {
     try {
       const { file } = createUploadDto;
-    //   console.log("Received file:", file);
+      console.log("Received file:", file);
 
       const cloudinaryUploadResponse = await this.cloudinaryService.uploadFile(file);
-    //   console.log("Cloudinary upload response:", cloudinaryUploadResponse);
+      console.log("Cloudinary upload response:", cloudinaryUploadResponse);
 
       const uploadInfo: UploadInput = {
         url: cloudinaryUploadResponse.url,
         mimeType: file.busBoyMimeType,
         user: userId,
         provider: 'cloudinary',
+        imagePublicId: cloudinaryUploadResponse.public_id
       };
 
       await this.memesService.create(uploadInfo);
@@ -63,5 +64,12 @@ export class MemesController {
   @Roles('admin', 'mentor', 'user')
   findOne(@Param('id') id: string) {
     return this.memesService.findOne(+id);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard)
+  @Roles('admin', 'mentor', 'user')
+  remove(@Param('id') id: string) {
+    return this.memesService.remove(+id);
   }
 }

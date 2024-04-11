@@ -32,6 +32,9 @@ export class UploadInput {
 
   @ApiProperty({ type: 'string' })
   user: string;
+
+  @ApiProperty({ type: 'string' })
+  imagePublicId: string;
 }
 
 export class UpdateUploadInput extends PartialType(UploadInput) {}

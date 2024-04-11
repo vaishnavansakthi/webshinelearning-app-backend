@@ -27,6 +27,10 @@ export class Memes {
   })
   user: AuthEntity;
 
+  @ApiProperty({ type: 'number' })
+  @Column({ name: 'image_public_id', type: 'varchar', nullable: true })
+  imagePublicId?: string;
+
   @CreateDateColumn({ type: 'date'})
   createdAt: Date;
 }
