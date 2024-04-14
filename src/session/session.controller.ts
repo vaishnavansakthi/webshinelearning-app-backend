@@ -37,14 +37,14 @@ export class SessionController {
 
   @Get()
   @UseGuards(AuthGuard)
-  @Roles('admin')
+  @Roles('admin', 'user')
   getAllSessions() {
     return this.sessionService.getAllSessions();
   }
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  @Roles('admin')
+  @Roles('admin','user')
   getSessionById(@Param('id') id: string) {
     return this.sessionService.getSessionById(id);
   }
