@@ -12,6 +12,7 @@ import { TaskModule } from './tasks/tasks.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { TaskTrackerModule } from './tasktracker/tasktracker.module';
 import { MemesModule } from './memes/memes.module';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { MemesModule } from './memes/memes.module';
     TaskModule,
     LeaderboardModule,
     TaskTrackerModule,
-    MemesModule
+    MemesModule,
+    SessionModule
   ],
   controllers: [],
   providers: [

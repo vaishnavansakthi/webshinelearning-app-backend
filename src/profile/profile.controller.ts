@@ -11,7 +11,7 @@ import {
 import { ProfileService } from './profile.service';
 import { ProfileDto } from './dto/profile.dto';
 import { AuthGuard } from '../guard/auth-guard';
-import { Roles } from 'src/decorator/roles.decorator';
+import { Roles } from '../decorator/roles.decorator';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { Profile } from './model/profile.entity';
 
