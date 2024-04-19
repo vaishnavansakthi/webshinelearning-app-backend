@@ -79,7 +79,7 @@ export class AuthService {
       role: user.role,
     };
   
-    const expiresIn = '86400s';
+    const expiresIn = '60s';
   
     const token = await this.jwtService.signAsync(tokenPayload, { secret: process.env.JWT_SECRET, expiresIn });
   
