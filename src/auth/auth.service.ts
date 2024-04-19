@@ -65,21 +65,26 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-
+  
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
+  
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const token = await this.jwtService.signAsync(
-      {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      },
-      { secret: process.env.JWT_SECRET },
-    );
+  
+    const tokenPayload = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    };
+  
+    const expiresIn = '86400s';
+  
+    const token = await this.jwtService.signAsync(tokenPayload, { secret: process.env.JWT_SECRET, expiresIn });
+  
+    const tokenExpiresAt = new Date(Date.now() + parseInt(expiresIn) * 1000);
+  
     return {
       access_token: token,
       user: {
@@ -90,8 +95,10 @@ export class AuthService {
         isActivate: user.isActivate,
         role: user.role,
       },
+      expires_at: tokenExpiresAt,
     };
   }
+  
 
   async forgotPassword(email: string) {
     const user = await this.repository.findOneBy({ email: email });
