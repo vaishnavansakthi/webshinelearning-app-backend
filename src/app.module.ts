@@ -13,6 +13,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
 import { TaskTrackerModule } from './tasktracker/tasktracker.module';
 import { MemesModule } from './memes/memes.module';
 import { SessionModule } from './session/session.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { SessionModule } from './session/session.module';
     LeaderboardModule,
     TaskTrackerModule,
     MemesModule,
-    SessionModule
+    SessionModule,
+    BookingModule
   ],
   controllers: [],
   providers: [
