@@ -7,12 +7,10 @@ import {
   Patch,
   Delete,
   Put,
-  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { BookingService } from './booking.service';
 import { CreateCourseDto } from './dto/booking.dto';
-import { AuthGuard } from '../guard/auth-guard';
 import { Roles } from '../../src/decorator/roles.decorator';
 
 @ApiTags('Booking')
