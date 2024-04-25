@@ -23,7 +23,6 @@ export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
   @Roles('admin')
   async createBooking(
     @Body() createCourseDto: CreateCourseDto,
@@ -33,7 +32,6 @@ export class BookingController {
   }
 
   @Put('/:id/book')
-  @UseGuards(AuthGuard)
   @Roles('admin', 'user', 'mentor')
   async bookCourse(
     @Param('id') bookingId: string,
@@ -45,7 +43,6 @@ export class BookingController {
 
   
   @Patch('/:id/cancel')
-  @UseGuards(AuthGuard)
   @Roles('admin', 'user', 'mentor')
   async cancelBooking(@Param('id') bookingId: string) {
     return this.bookingService.cancelBooking(bookingId);
@@ -53,16 +50,12 @@ export class BookingController {
 
  
   @Get()
-  @UseGuards(AuthGuard)
   @Roles('admin', 'user')
   async getAllBookings() {
     return this.bookingService.getAllBookings();
   }
-
-
   
   @Get('/:id')
-  @UseGuards(AuthGuard)
   @Roles('admin', 'user')
   async getBookingById(@Param('id') bookingId: string) {
     return this.bookingService.getBookingById(bookingId);
@@ -70,7 +63,6 @@ export class BookingController {
 
 
   @Patch('/:id')
-  @UseGuards(AuthGuard)
   @Roles('admin', 'user', 'mentor')
   async updateBooking(
     @Param('id') bookingId: string,
@@ -80,14 +72,12 @@ export class BookingController {
   }
 
   @Delete('/:id')
-  @UseGuards(AuthGuard)
   @Roles('admin')
   async deleteBooking(@Param('id') bookingId: string) {
     return this.bookingService.deleteBooking(bookingId);
   }
 
   @Delete()
-  @UseGuards(AuthGuard)
   @Roles('admin')
   async deleteAllBookings() {
     return this.bookingService.deleteAllBookings();
