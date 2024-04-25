@@ -12,20 +12,23 @@ export class BookingService {
   ) {}
 
   async createBooking(createCourseDto: CreateCourseDto, userSeats: number) {
-    const courses = Array(userSeats).fill(null).map(() => {
-      return this.bookingRepository.create({
-        availableSeats: userSeats,
-        isCourseBooked: false,
-        username: createCourseDto.username,
-        email: createCourseDto.email,
-        phone: createCourseDto.phone,
+    const courses = Array(userSeats)
+      .fill(null)
+      .map((_, index) => {
+        return this.bookingRepository.create({
+          availableSeats: userSeats,
+          isCourseBooked: false,
+          username: createCourseDto.username,
+          email: createCourseDto.email,
+          phone: createCourseDto.phone,
+          order: index
+        });
       });
-    });
-  
+
     return this.bookingRepository.save(courses);
   }
   async bookCourse(bookingId: string, createCourseDto: CreateCourseDto) {
-    const course = await this.bookingRepository.findOneBy({id: bookingId});
+    const course = await this.bookingRepository.findOneBy({ id: bookingId });
     if (!course) {
       throw new NotFoundException(`Course with ID ${bookingId} not found`);
     }
@@ -38,7 +41,15 @@ export class BookingService {
     course.email = createCourseDto.email;
     course.phone = createCourseDto.phone;
 
-    return this.bookingRepository.save(course);
+    await this.bookingRepository.save(course);
+
+    const allBookings = await this.bookingRepository.find();
+
+    const reorderedBookings = allBookings.sort((a: any, b: any) => {
+      return a.originalOrder - b.originalOrder;
+    });
+
+    return reorderedBookings;
   }
 
   async cancelBooking(bookingId: string) {
@@ -64,7 +75,7 @@ export class BookingService {
     if (!course) {
       throw new NotFoundException(`Course with ID ${bookingId} not found`);
     }
-    return this.bookingRepository.save({...course,...createCourseDto });
+    return this.bookingRepository.save({ ...course, ...createCourseDto });
   }
 
   async deleteBooking(bookingId: string) {

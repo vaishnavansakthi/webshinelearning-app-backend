@@ -25,6 +25,9 @@ export class BookingModel {
   @Column()
   availableSeats: number;
 
+  @Column({nullable: true})
+  order: number;
+
   @CreateDateColumn()
   createdAt: Date;
 }

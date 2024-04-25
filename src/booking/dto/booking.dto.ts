@@ -32,4 +32,6 @@ export class CreateCourseDto {
     example: 'Phone number',
   })
   phone?: string;
+
+  orders?: number;
 }
