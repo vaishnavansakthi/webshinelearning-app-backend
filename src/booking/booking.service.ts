@@ -21,7 +21,7 @@ export class BookingService {
           username: createCourseDto.username,
           email: createCourseDto.email,
           phone: createCourseDto.phone,
-          order: index
+          order: index + 1
         });
       });
 
