@@ -72,7 +72,7 @@ export class BookingService {
     const mailOptions = {
       from: process.env.AUTH_EMAIL,
       to: email,
-      subject: 'Password Reset OTP',
+      subject: 'Course booked successfully',
       html: `
       <!DOCTYPE html>
       <html lang="en">
@@ -104,6 +104,9 @@ export class BookingService {
         text-transform: uppercase; /* Convert text to uppercase */
         letter-spacing: 2px; /* Increase letter spacing */
       }
+      h3 {
+        text-align: center;
+      }
       p {
           color: #555555;
           line-height: 1.5;
@@ -131,7 +134,7 @@ export class BookingService {
       <body>
         <div class="container">
           <h1><span style="color: #FFA500;">Hello,</span>${username}</h1>
-          <p>Your Course booked successfully</p>
+          <h3>Your Course booked successfully 🎉🪅</h3>
           <p class="note">Please take a screenshot and share it with the webshine mentor to get onboarded your admission</p>
         </div>
       </body>
