@@ -42,6 +42,8 @@ export class BookingService {
     course.email = createCourseDto.email;
     course.phone = createCourseDto.phone;
 
+    await this.sendEmail(createCourseDto.email, createCourseDto.username)
+
     await this.bookingRepository.save(course);
 
     const allBookings = await this.bookingRepository.find();
@@ -49,8 +51,6 @@ export class BookingService {
     const reorderedBookings = allBookings.sort((a: any, b: any) => {
       return a.originalOrder - b.originalOrder;
     });
-
-    this.sendEmail(createCourseDto.email, createCourseDto.username)
 
     return reorderedBookings;
 
