@@ -33,5 +33,17 @@ export class CreateCourseDto {
   })
   phone?: string;
 
+  @ApiProperty({
+    required: true,
+    example: 'Choose your course',
+  })
+  chooseYourCourse?: string;
+
+  @ApiProperty({
+    required: true,
+    example: 'Description',
+  })
+  desc?: string;
+
   orders?: number;
 }

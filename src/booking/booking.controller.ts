@@ -13,7 +13,7 @@ import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { BookingService } from './booking.service';
 import { CreateCourseDto } from './dto/booking.dto';
 import { AuthGuard } from '../guard/auth-guard';
-import { Roles } from '../../src/decorator/roles.decorator';
+import { Roles } from '../decorator/roles.decorator';
 
 @ApiTags('Booking')
 @ApiSecurity('x-api-key')
@@ -57,18 +57,18 @@ export class BookingController {
   
   @Get('/:id')
   @UseGuards(AuthGuard)
-  @Roles('admin', 'user')
+  @Roles('admin')
   async getBookingById(@Param('id') bookingId: string) {
     return this.bookingService.getBookingById(bookingId);
   }
 
 
-  @Patch('/:id')
+  @Put('/:id')
   @UseGuards(AuthGuard)
-  @Roles('admin', 'user', 'mentor')
+  @Roles('admin')
   async updateBooking(
     @Param('id') bookingId: string,
-    @Body() createCourseDto: CreateCourseDto,
+    @Body() createCourseDto: Partial<CreateCourseDto>,
   ) {
     return this.bookingService.updateBooking(bookingId, createCourseDto);
   }

@@ -20,6 +20,12 @@ export class BookingModel {
   phone: string;
 
   @Column({nullable: true})
+  chooseYourCourse: string;
+
+  @Column({nullable: true})
+  desc: string;
+
+  @Column({nullable: true})
   isCourseBooked: boolean;
 
   @Column()

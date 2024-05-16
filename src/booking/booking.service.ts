@@ -22,6 +22,8 @@ export class BookingService {
           username: createCourseDto.username,
           email: createCourseDto.email,
           phone: createCourseDto.phone,
+          chooseYourCourse: createCourseDto.chooseYourCourse,
+          desc: createCourseDto.desc,
           order: index + 1
         });
       });
@@ -41,6 +43,8 @@ export class BookingService {
     course.username = createCourseDto.username;
     course.email = createCourseDto.email;
     course.phone = createCourseDto.phone;
+    course.chooseYourCourse = createCourseDto.chooseYourCourse;
+    course.desc = createCourseDto.desc;
 
     await this.sendEmail(createCourseDto.email, createCourseDto.username)
 
