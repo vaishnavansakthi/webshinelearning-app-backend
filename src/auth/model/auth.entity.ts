@@ -11,6 +11,7 @@ import { Task } from '../../tasks/model/tasks.entity';
 import { Leaderboard } from '../../leaderboard/model/leaderboard.entity';
 import { TaskTracker } from '../../tasktracker/model/tasktracker.entity';
 import { Memes } from '../../memes/model/memes.entity';
+import { IframeVideos } from '../../iframeVideos/model/iframeVideos.entity';
 
 export enum Role {
   ADMIN = 'admin',
@@ -52,6 +53,11 @@ export class AuthEntity {
     onDelete: 'CASCADE',
   })
   leaderboard: Leaderboard[];
+
+  @OneToMany(() => IframeVideos, (iframeVideos) => iframeVideos.user, {
+    onDelete: 'CASCADE',
+  })
+  iframeVideos: IframeVideos[];
 
   @OneToMany(() => Task, (task) => task.user, { onDelete: 'CASCADE' })
   tasks: Task[];

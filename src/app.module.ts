@@ -14,6 +14,7 @@ import { TaskTrackerModule } from './tasktracker/tasktracker.module';
 import { MemesModule } from './memes/memes.module';
 import { SessionModule } from './session/session.module';
 import { BookingModule } from './booking/booking.module';
+import { IframeVideosModule } from './iframeVideos/iframeVideos.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { BookingModule } from './booking/booking.module';
     TaskTrackerModule,
     MemesModule,
     SessionModule,
-    BookingModule
+    BookingModule,
+    IframeVideosModule,
   ],
   controllers: [],
   providers: [
@@ -52,7 +54,7 @@ import { BookingModule } from './booking/booking.module';
     },
     {
       provide: APP_GUARD,
-      useClass: RolesGuard
+      useClass: RolesGuard,
     },
   ],
 })
