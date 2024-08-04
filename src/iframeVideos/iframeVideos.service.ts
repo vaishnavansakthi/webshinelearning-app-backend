@@ -36,6 +36,10 @@ export class IframeVideosService {
     });
   }
 
+  async getAllIframeVideos(): Promise<IframeVideos[]> {
+    return this.iframeVideosRepository.find({ relations: ['user'] });
+  }
+
   async deleteIframeVideos(iframeVideosId: string): Promise<void> {
     const iframeVideos = await this.iframeVideosRepository.findOneBy({
       id: iframeVideosId,

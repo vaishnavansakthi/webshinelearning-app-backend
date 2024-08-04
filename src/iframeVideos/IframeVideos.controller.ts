@@ -43,6 +43,13 @@ export class IframeVideosController {
     return await this.iframeVideosService.GetIframeVideos(userId);
   }
 
+  @Get()
+  @UseGuards(AuthGuard)
+  @Roles('admin', 'user')
+  async getAllIframeVideos(): Promise<IframeVideos[]> {
+    return await this.iframeVideosService.getAllIframeVideos();
+  }
+
   @Delete(':iframeVideosId')
   @UseGuards(AuthGuard)
   @Roles('admin')
