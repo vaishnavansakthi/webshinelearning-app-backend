@@ -36,7 +36,7 @@ export class IframeVideosController {
 
   @Get(':userId')
   @UseGuards(AuthGuard)
-  @Roles('admin')
+  @Roles('admin', 'user')
   async getIframeVideos(
     @Param('userId') userId: string,
   ): Promise<IframeVideos[]> {
