@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthEntity } from '../auth/model/auth.entity';
 import { IframeVideos } from './model/iframeVideos.entity';
-import { IframeVideosController } from './iframeVideos.controller';
+import { IframeVideosController } from './IframeVideos.controller';
 import { IframeVideosService } from './iframeVideos.service';
 
 @Module({

@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Profile } from './model/profile.entity';
 import { Repository } from 'typeorm';
-import { AuthEntity } from 'src/auth/model/auth.entity';
+import { AuthEntity } from '../../src/auth/model/auth.entity';
 
 @Injectable()
 export class ProfileService {
